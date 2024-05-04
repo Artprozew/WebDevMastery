@@ -18,7 +18,6 @@ body {
 .table {
     max-width: 640px;
     margin: 45px auto;
-    /* background: #fff; */
     padding: 45px;
     border-radius: 7px;
     background: #fff;
@@ -105,8 +104,8 @@ body {
     background: #f14f2f;
 }
 
-.error-results {
-    background: rgb(252, 28, 28);
+.result-error {
+    background: #fc1c1c;
 }
 
 .results-box {

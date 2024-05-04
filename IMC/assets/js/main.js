@@ -1,15 +1,14 @@
 (function main() {
-    function changeResults(createAt, classToAdd) {
+    function addElementWithClass(elementToAddTo, className) {
         const resultsText = document.createElement("p");
-        resultsText.classList.add(classToAdd);
+        resultsText.classList.add(className);
         resultsText.classList.add("results-box");
-        createAt.innerHTML = "";
-        createAt.appendChild(resultsText);
+        elementToAddTo.innerHTML = "";
+        elementToAddTo.appendChild(resultsText);
         return resultsText
-
     }
 
-    function getInterpretedIMCAndColor(imc) {
+    function getInterpretedIMCAndColorClass(imc) {
         const resultsTexts = ["Abaixo do peso", "Peso normal", "Sobrepeso",
         "Obesidade grau 1", "Obesidade grau 2", "Obesidade grau 3"]
         
@@ -20,6 +19,7 @@
         else if (imc >= 35 && imc <= 39.9) return [resultsTexts[4], "obesity2"]
         else return [resultsTexts[5], "obesity3"]
     }
+    
     const form = document.getElementById("form");
     form.querySelector("#button-submit").addEventListener("click", function(event) {
         event.preventDefault();
@@ -29,14 +29,13 @@
         const resultsContainer = document.getElementById("results-container");
 
         if (isNaN(weight)) {
-            changeResults(resultsContainer, "error-results").textContent = "Você deve inserir um peso válido!";
+            addElementWithClass(resultsContainer, "result-error").textContent = "Você deve inserir um peso válido!";
         } else if (isNaN(height)) {
-            changeResults(resultsContainer, "error-results").textContent = "Você deve inserir uma altura válida!";
+            addElementWithClass(resultsContainer, "result-error").textContent = "Você deve inserir uma altura válida!";
         } else {
-            const [resultText, classColor] = getInterpretedIMCAndColor(resultIMC);
-            changeResults(resultsContainer, classColor).textContent = `Seu IMC é de \
+            const [resultText, classColor] = getInterpretedIMCAndColorClass(resultIMC);
+            addElementWithClass(resultsContainer, classColor).textContent = `Seu IMC é de \
             ${resultIMC.toFixed(2)} (${resultText})`;
         }
     });
-
 })(); // IIFE
